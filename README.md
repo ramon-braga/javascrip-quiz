@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# JavaScript Quiz Application
 
-## Getting Started
+This project creates a quiz application in JavaScript. It contains several components and data structures that work together to display a quiz, collect answers, calculate the user's score, and display the result.
 
-First, run the development server:
+## Types
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Question
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This type defines the structure of a question in the quiz.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Properties**:
+    - `question`: The text of the question.
+    - `options`: An array of possible answers for the question.
+    - `answer`: The index of the correct answer in the options array.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Components
 
-## Learn More
+### QuestionItem
 
-To learn more about Next.js, take a look at the following resources:
+Represents a single quiz question.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Props**:
+    - `question`: The current question to be displayed.
+    - `count`: The index of the current question in the quiz.
+    - `onAnswer`: Callback function to handle answer selection.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- **Functionality**:
+    - Displays the question and the options.
+    - Handles answer selection and calls the `onAnswer` function with the selected answer index.
 
-## Deploy on Vercel
+### Result
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Displays the quiz result.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **Props**:
+    - `answers`: An array of user-selected answers.
+    - `correct`: The count of correct answers.
+
+- **Functionality**:
+    - Calculates and displays the user's score as a percentage.
+
+## Main Page (Page)
+
+This is the main component of the application.
+
+- **Functionality**:
+    - Manages the state of the quiz, including the current question, answers, and quiz result.
+    - Handles navigation between questions and calculates the score.
+    - Provides a restart button to restart the quiz.
+
+- **State Variables**:
+    - `currentQuestion`: Index of the current question being displayed.
+    - `answers`: Array of user-selected answers.
+    - `showResult`: A boolean indicating whether the quiz result should be displayed.
+    - `countCorrectAnswers`: Count of correct answers.
+
+- **Functions**:
+    - `loadNextQuestion`: Increments the current question index to navigate to the next question.
+    - `handleAnswered`: Handles the user's answer and navigates to the next question.
+    - `handleClickButton`: Resets the quiz state when the restart button is clicked.
+
+- **Components Used**:
+    - Uses the `QuestionItem` component to display a question.
+    - Uses the `Result` component to display the quiz result.
+
+- **Rendering**:
+    - Displays questions or results based on the current state of the application.
+    - Provides a restart button when the quiz result is displayed.
+
+## Notes
+
+- The code uses React for component-based UI rendering and state management.
+- The quiz data is stored in an array of questions, each represented by the `Question` type.
+- The main page manages the state of the quiz and uses components to display questions and results.
